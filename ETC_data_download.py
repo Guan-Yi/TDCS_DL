@@ -29,7 +29,6 @@ def create_dl_url (url, t1, t2, t3, hs):
 
 def main():
     url = 'http://tisvcloud.freeway.gov.tw/history/TDCS/'
-    print (sys.argv[1], sys.argv[2], sys.argv[3])
     L1 = create_url_1(url, sys.argv[1])
     L2_1 = create_url_2_1(L1, sys.argv[2])
     L2_2 = create_url_2_2(L1, sys.argv[1], sys.argv[2])
