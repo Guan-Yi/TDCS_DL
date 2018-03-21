@@ -29,35 +29,63 @@ def create_dl_url (url, t1, t2, t3, hs):
 
 def main():
     url = 'http://tisvcloud.freeway.gov.tw/history/TDCS/'
-    L1 = create_url_1(url, sys.argv[1])
-    L2_1 = create_url_2_1(L1, sys.argv[2])
-    L2_2 = create_url_2_2(L1, sys.argv[1], sys.argv[2])
-    L3 = create_url_3(L2_1, sys.argv[3])
+    data_type = sys.argv[1]
+    year = sys.argv[2]
+    date = sys.argv[3]
     
-    print (L1)
-    print (L2_1)
-    print (L2_2)
-    print (L3)
+    
+    if len(sys.argv)>5:
+        hour_1 = sys.argv[4]
+        hour_2 = sys.argv[5]
+        hour_diff = int(hour_2) - int(hour_1)
+        hour = list(range(int(hour_1),int(hour_2)+1))
+        for i in range(len(hour)):
+            hour[i] = str(hour[i]).zfill(2)
+    else:
+        hour_1 = sys.argv[4]
+    
+    complete_date = year + date
+        
+    L1 = create_url_1(url, data_type)
+    L2_1 = create_url_2_1(L1, complete_date)
+    L2_2 = create_url_2_2(L1, data_type, complete_date)
+    
+    #hour
+    L3 = create_url_3(L2_1, sys.argv[3])
     
     hs = list(range(0,5501,500))
     for i in range(len(hs)):
         hs[i] = str(hs[i]).zfill(4)
     
     try:
-        for i in range(len(hs)):
-            temp_url = create_dl_url(L3, sys.argv[1], sys.argv[2], sys.argv[3], hs[i])
-            print (temp_url[0])
-            urllib.request.urlretrieve(temp_url[0], temp_url[1])
-            time.sleep(1)
+        if (hour_diff > 0):
+            for i in range(len(hour)):
+                L3 = create_url_3(L2_1, hour[i])
+                for j in range(len(hs)):
+                    temp_url = create_dl_url(L3, data_type, complete_date, hour[i], hs[j])
+                    print (temp_url[0])
+                    urllib.request.urlretrieve(temp_url[0], temp_url[1])
+                    time.sleep(1)
+        else:
+            temp_hour =  str(hour_1).zfill(2)
+            L3 = create_url_3(L2_1, temp_hour)
+            for i in range(len(hs)):
+                temp_url = create_dl_url(L3, data_type, complete_date, temp_hour, hs[i])
+                print (temp_url[0])
+                urllib.request.urlretrieve(temp_url[0], temp_url[1])
+                time.sleep(1)
         
+    except Exception:
+        print ('something wrong! Q_Q')
+        
+        
+    else:
         filename = L2_2.split("/")[-1]
         with open(filename, "wb") as f:
             r = requests.get(L2_2)
             f.write(r.content)
         print ('sucess!')
-        
-    except:
-        print ('no file')
+    
     return 
 
 if __name__ == "__main__":
