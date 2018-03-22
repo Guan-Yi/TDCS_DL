@@ -43,6 +43,7 @@ def main():
             hour[i] = str(hour[i]).zfill(2)
     else:
         hour_1 = sys.argv[4]
+        hour_diff = 0
     
     complete_date = year + date
         
@@ -66,6 +67,8 @@ def main():
                     print (temp_url[0])
                     urllib.request.urlretrieve(temp_url[0], temp_url[1])
                     time.sleep(1)
+   
+            
         else:
             temp_hour =  str(hour_1).zfill(2)
             L3 = create_url_3(L2_1, temp_hour)
@@ -74,6 +77,7 @@ def main():
                 print (temp_url[0])
                 urllib.request.urlretrieve(temp_url[0], temp_url[1])
                 time.sleep(1)
+
         
     except Exception:
         print ('something wrong! Q_Q')
