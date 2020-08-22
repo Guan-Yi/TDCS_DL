@@ -20,5 +20,5 @@ $python	ETC_data_download.py <data_type> <year> <date> <start_hour> [end_hour]
 
 ## example:  
 ```
-$python  ETC_data_download.py M08A 2020 0801 12 15
+$python ETC_data_download.py M08A 2020 0801 12 15
 ```  
