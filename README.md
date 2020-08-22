@@ -7,13 +7,18 @@
 * M07A：各類車種旅次平均長度  
 * M08A：各類車種旅次數量  
 
-# Usage
+## Usage
 ```
-$python	ETC_data_download.py  <data type>  <year>  <date>  <start_hour>  <end_hour>
+$python	ETC_data_download.py <data_type> <year> <date> <start_hour> [end_hour]
 ```
-#### example:  
-```
-$python  ETC_data_download.py  M08  2018  0315  7   9
-```  
- note: if you just want one hour data, you can skip the <end_hour>.
+### parameters
+* `data_type`: M03A...M08A
+* `year`: YYYY, ex: 2020
+* `date`: MMDD, ex: 0801
+* `start_hour`: 0 ~ 24
+* `end_hour`: optional, if just need data in one hour.
 
+## example:  
+```
+$python  ETC_data_download.py M08A 2020 0801 12 15
+```  

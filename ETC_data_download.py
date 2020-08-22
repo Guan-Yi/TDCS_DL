@@ -1,4 +1,3 @@
-
 import requests
 import urllib.request
 import os
@@ -13,7 +12,6 @@ def create_url_2_1 (url, level_2):
     temp = url + level_2 + '/'
     return temp
 
-#end 
 def create_url_2_2 (url, level_1, level_2):    
     temp = url + level_1 + '_' + level_2 + '.tar.gz'
     return temp
@@ -67,7 +65,6 @@ def main():
                     print (temp_url[0])
                     urllib.request.urlretrieve(temp_url[0], temp_url[1])
                     time.sleep(1)
-   
             
         else:
             temp_hour =  str(hour_1).zfill(2)
@@ -80,7 +77,7 @@ def main():
 
         
     except Exception:
-        print ('something wrong! Q_Q')
+        print ('something wrong!')
         
         
     else:
@@ -106,7 +103,7 @@ if __name__ == "__main__":
     elif (sys.argv[1] == 'M08A'):
         print ('各類車種旅次數量')
     else:
-        print ('???')
+        print ('資料種類錯誤')
     if not os.path.exists('ETC'):
         os.makedirs('ETC')
     os.chdir('ETC')
